@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MV Estética Automotiva - Agendamentos</title>
+
+    <style>
+        :root {
+            --primary: #1a237e;
+            --secondary: #3949ab;
+            --light: #f5f5f5;
+            --dark: #0d47a1;
+            --success: #2e7d32;
+            --danger: #c62828;
+            --shadow: rgba(0,0,0,0.2);
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: var(--light);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: var(--primary);
+            padding: 20px;
+            color: white;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            box-shadow: 0 3px 6px var(--shadow);
+        }
+
+        .container {
+            width: 92%;
+            margin: auto;
+            padding: 20px 0;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px var(--shadow);
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        select, input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        textarea {
+            resize: none;
+            height: 100px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background: var(--dark);
+        }
+
+        .category {
+            padding: 12px;
+            background: var(--secondary);
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .category:hover {
+            background: var(--primary);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #333;
+            font-size: 0.9rem;
+        }
+    </style>
+
+    <script>
+        function selecionarCategoria(cat) {
+            document.querySelectorAll(".servico-lista").forEach(div => div.classList.add("hidden"));
+            document.getElementById(cat).classList.remove("hidden");
+        }
+
+        function enviarWhatsApp() {
+            const nome = document.getElementById("nome").value.trim();
+            const tel = document.getElementById("telefone").value.trim();
+            const servico = document.getElementById("servico").value;
+            const obs = document.getElementById("obs").value.trim();
+
+            if (nome === "" || tel === "") {
+                alert("Preencha seu nome e telefone!");
+                return;
+            }
+
+            const numero = "5538998024796"; // Seu WhatsApp
+            const msg = 
+`📌 *NOVO AGENDAMENTO*  
+👤 Nome: ${nome}  
+📞 Telefone: ${tel}  
+🔧 Serviço escolhido: ${servico}  
+📝 Observações: ${obs}`;
+
+            const link = `https://wa.me/${numero}?text=${encodeURIComponent(msg)}`;
+            window.open(link, "_blank");
+        }
+    </script>
+</head>
+
+<body>
+
+<header>MV Estética Automotiva</header>
+
+<div class="container">
+
+    <div class="card">
+        <div class="title">Informações do Cliente</div>
+
+        <label>Nome completo</label>
+        <input type="text" id="nome" placeholder="Digite seu nome">
+
+        <label>Telefone</label>
+        <input type="text" id="telefone" placeholder="(DDD) 99999-9999">
+    </div>
+
+
+    <div class="card">
+        <div class="title">Escolha um serviço</div>
+
+        <select id="servico">
+            <option value="Higienização interna completa">Higienização interna completa</option>
+            <option value="Polimento">Polimento</option>
+            <option value="Lavagem detalhada">Lavagem detalhada</option>
+            <option value="Cristalização de pintura">Cristalização de pintura</option>
+            <option value="Vitrificação de pintura">Vitrificação de pintura</option>
+            <option value="Hidratação de bancos">Hidratação de bancos</option>
+            <option value="Remoção de riscos leves">Remoção de riscos leves</option>
+            <option value="Higienização de ar condicionado">Higienização de ar condicionado</option>
+        </select>
+    </div>
+
+    <div class="card">
+        <div class="title">Observações</div>
+        <textarea id="obs" placeholder="Detalhes adicionais..."></textarea>
+    </div>
+
+    <button onclick="enviarWhatsApp()">Agendar via WhatsApp</button>
+</div>
+
+<div class="footer">© 2025 MV Estética Automotiva — Todos os direitos reservados.</div>
+
+</body>
+</html>
